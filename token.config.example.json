@@ -1,0 +1,12 @@
+{
+  "cluster": "devnet",
+  "rpcUrl": "https://api.devnet.solana.com",
+  "name": "Agent Utility Token",
+  "symbol": "AUT",
+  "decimals": 6,
+  "initialSupply": "21000000",
+  "revokeMintAuthority": true,
+  "revokeFreezeAuthority": true,
+  "payerKeypairPath": ".secrets/devnet-payer.json",
+  "recipientPublicKey": ""
+}

@@ -1,0 +1,20 @@
+[package]
+name = "utility_staking"
+version = "0.1.0"
+description = "On-chain staking program for a Solana utility token"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "utility_staking"
+
+[features]
+no-entrypoint = []
+no-idl = []
+cpi = ["no-entrypoint"]
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
+default = []
+
+[dependencies]
+anchor-lang = "0.32.1"
+anchor-spl = "0.32.1"

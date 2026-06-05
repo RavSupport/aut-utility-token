@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AUT - Agent Utility Token</title>
+    <meta
+      name="description"
+      content="AUT is a Solana-first utility token prototype for AI automation credits, staking-based quota, and agent marketplace access."
+    />
+    <meta property="og:title" content="AUT - Agent Utility Token" />
+    <meta
+      property="og:description"
+      content="A 21 million fixed-supply Solana utility token prototype verified on localnet."
+    />
+    <meta property="og:type" content="website" />
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #111827;
+        --muted: #5b6472;
+        --line: #d9dee7;
+        --surface: #ffffff;
+        --soft: #f5f7fa;
+        --accent: #0f8f7b;
+        --accent-strong: #096b5e;
+        --gold: #c89b3c;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: var(--surface);
+        line-height: 1.5;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .wrap {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      header {
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.94);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        backdrop-filter: blur(10px);
+      }
+
+      nav {
+        min-height: 68px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 760;
+        letter-spacing: 0;
+      }
+
+      .mark {
+        width: 36px;
+        height: 36px;
+        border: 1px solid #193b36;
+        display: grid;
+        place-items: center;
+        background: #10231f;
+        color: #e8d49a;
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .links {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 18px;
+        border: 1px solid var(--ink);
+        background: var(--ink);
+        color: #fff;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .button.secondary {
+        background: transparent;
+        color: var(--ink);
+      }
+
+      .hero {
+        padding: 92px 0 76px;
+        background:
+          linear-gradient(90deg, rgba(15, 143, 123, 0.1), rgba(200, 155, 60, 0.08)),
+          var(--surface);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+        gap: 56px;
+        align-items: center;
+      }
+
+      h1 {
+        margin: 0;
+        max-width: 760px;
+        font-size: clamp(42px, 7vw, 76px);
+        line-height: 0.98;
+        font-weight: 820;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        margin: 26px 0 0;
+        max-width: 680px;
+        font-size: 19px;
+        color: var(--muted);
+      }
+
+      .actions {
+        margin-top: 34px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .terminal {
+        border: 1px solid #17231f;
+        background: #101816;
+        color: #d5eadf;
+        padding: 22px;
+        min-height: 340px;
+        box-shadow: 0 24px 60px rgba(14, 31, 28, 0.18);
+      }
+
+      .terminal pre {
+        margin: 0;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        font: 13px/1.7 "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+      }
+
+      main section {
+        padding: 72px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      h2 {
+        margin: 0 0 18px;
+        font-size: clamp(28px, 4vw, 44px);
+        line-height: 1.08;
+        letter-spacing: 0;
+      }
+
+      .section-intro {
+        max-width: 760px;
+        color: var(--muted);
+        font-size: 18px;
+        margin: 0 0 34px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        background: var(--surface);
+        padding: 22px;
+      }
+
+      .panel h3 {
+        margin: 0 0 10px;
+        font-size: 18px;
+      }
+
+      .panel p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .facts {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1px;
+        background: var(--line);
+        border: 1px solid var(--line);
+      }
+
+      .fact {
+        background: var(--soft);
+        padding: 22px;
+      }
+
+      .fact strong {
+        display: block;
+        font-size: 22px;
+      }
+
+      .fact span {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .mono {
+        font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+        overflow-wrap: anywhere;
+      }
+
+      .notice {
+        border-left: 4px solid var(--gold);
+        background: #fff8e8;
+        padding: 18px 20px;
+        color: #4b3920;
+      }
+
+      footer {
+        padding: 34px 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      @media (max-width: 820px) {
+        nav {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 16px 0;
+        }
+
+        .links {
+          width: 100%;
+          overflow-x: auto;
+          flex-wrap: wrap;
+          padding-bottom: 2px;
+        }
+
+        .hero {
+          padding: 58px 0 54px;
+        }
+
+        .hero-grid,
+        .grid,
+        .facts {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="wrap" aria-label="Primary navigation">
+        <div class="brand"><span class="mark">AUT</span><span>Agent Utility Token</span></div>
+        <div class="links">
+          <a href="#utility">Utility</a>
+          <a href="#verification">Verification</a>
+          <a href="#staking">Staking</a>
+          <a href="#publish">Publish</a>
+        </div>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <h1>A 21 million supply utility token for AI automation access.</h1>
+          <p class="lead">
+            AUT is a Solana-first prototype for agent credits, staking-based quota, marketplace access,
+            and transparent utility-backed token design. It is verified on localnet and intentionally not
+            marketed as an investment promise.
+          </p>
+          <div class="actions">
+            <a class="button" href="#verification">View Verification</a>
+            <a class="button secondary" href="docs/research.md">Read Research</a>
+          </div>
+        </div>
+        <div class="terminal" aria-label="Verified localnet token details">
+          <pre>Token: AUT
+Supply: 21,000,000
+Decimals: 6
+Base units: 21,000,000,000,000
+
+Localnet mint:
+EnibLkmB89dB7ANdPc5R65Xf3ujZkHwfZpaV9N4RFQaH
+
+Mint authority: not set
+Freeze authority: not set
+
+Staking program:
+4kp8deHBoE6FQ7C3PD4QJ8Sw6rc9cSyJGtDxdBhwDmv2</pre>
+        </div>
+      </div>
+    </section>
+
+    <main>
+      <section id="utility">
+        <div class="wrap">
+          <h2>Utility First</h2>
+          <p class="section-intro">
+            The strongest design path is a token that pays for useful services instead of relying on speculation.
+            AUT is structured around practical platform access.
+          </p>
+          <div class="grid">
+            <article class="panel">
+              <h3>AI automation credits</h3>
+              <p>Use tokens to buy task credits for agents, workflows, API calls, and business automation.</p>
+            </article>
+            <article class="panel">
+              <h3>Staked quota</h3>
+              <p>Stake tokens to unlock API quota, rate limits, premium automation tiers, or platform discounts.</p>
+            </article>
+            <article class="panel">
+              <h3>Marketplace access</h3>
+              <p>Use tokens for listings, templates, integrations, creator tools, and verified agent workflows.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="verification">
+        <div class="wrap">
+          <h2>Verified Locally</h2>
+          <p class="section-intro">
+            The token and staking program are functional on a local Solana validator. Devnet is pending only because
+            public faucet funding was rate-limited.
+          </p>
+          <div class="facts">
+            <div class="fact"><strong>21M</strong><span>Whole token supply</span></div>
+            <div class="fact"><strong>6</strong><span>Decimals</span></div>
+            <div class="fact"><strong>Revoked</strong><span>Mint authority</span></div>
+            <div class="fact"><strong>Passed</strong><span>Local staking tests</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="staking">
+        <div class="wrap">
+          <h2>Stakable By Design</h2>
+          <p class="section-intro">
+            Staked principal is held in on-chain PDA-owned vaults. The host machine can run validator and monitoring
+            infrastructure, but it does not custody user funds.
+          </p>
+          <div class="grid">
+            <article class="panel">
+              <h3>Stake</h3>
+              <p>Users deposit tokens into a program-controlled vault.</p>
+            </article>
+            <article class="panel">
+              <h3>Claim</h3>
+              <p>Rewards accrue according to the configured rate and are paid from a funded reward vault.</p>
+            </article>
+            <article class="panel">
+              <h3>Unstake</h3>
+              <p>Users withdraw principal according to published staking rules.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="publish">
+        <div class="wrap">
+          <h2>Free Publishing Path</h2>
+          <p class="section-intro">
+            The cheapest public launch path is a static website on GitHub Pages, mirrored to Cloudflare Pages if desired,
+            and optionally pinned to IPFS for an immutable snapshot.
+          </p>
+          <div class="notice">
+            AUT is a development prototype. It is not a public mainnet token, investment product, stablecoin, or promise
+            of profit. Mainnet deployment requires legal review, security review, treasury controls, and launch approval.
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <span>AUT project publication package. Localnet verified on 2026-06-04.</span>
+      </div>
+    </footer>
+  </body>
+</html>

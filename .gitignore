@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.anchor/
+target/
+token.config.json
+.secrets/
+*.log

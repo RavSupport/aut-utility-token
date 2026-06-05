@@ -1,0 +1,27 @@
+{
+  "name": "utility-token-project",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "wallet:create-devnet": "tsx src/create-devnet-wallet.ts",
+    "token:create": "tsx src/create-token.ts",
+    "token:validate-config": "tsx src/validate-config.ts",
+    "test": "vitest run",
+    "anchor:build": "anchor build",
+    "anchor:test": "anchor test"
+  },
+  "dependencies": {
+    "@solana/spl-token": "^0.4.14",
+    "@solana/web3.js": "^1.98.4",
+    "commander": "^14.0.2",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@coral-xyz/anchor": "^0.32.1",
+    "@types/node": "^24.10.1",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.13"
+  }
+}
