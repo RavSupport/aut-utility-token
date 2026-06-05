@@ -23,6 +23,8 @@
 
 Mainnet must not proceed until these are complete:
 
+- Mainnet config gate passes only after all required launch environment variables are set.
+- Dependency risk register is reviewed and either resolved or formally accepted.
 - Legal review of token sale, marketing, treasury, staking, and rewards.
 - Independent smart contract review.
 - Public tokenomics document.
@@ -32,6 +34,16 @@ Mainnet must not proceed until these are complete:
 - Liquidity plan reviewed.
 - Incident response plan written.
 - Admin key rotation and custody plan verified.
+
+Required launch gate variables:
+
+- `ALLOW_MAINNET`
+- `MAINNET_LEGAL_REVIEW_COMPLETE`
+- `MAINNET_SECURITY_REVIEW_COMPLETE`
+- `MAINNET_MULTISIG_READY`
+- `MAINNET_DEPENDENCY_RISK_ACCEPTED`
+- `MAINNET_VALIDATOR_REHEARSED`
+- `MAINNET_METADATA_READY`
 
 ## Staking Safety Rules
 
@@ -49,4 +61,3 @@ Mainnet must not proceed until these are complete:
 - Do not present staking rewards as passive investment income without legal review.
 - Do not call the treasury "backing" if holders do not have redemption rights.
 - If redemption rights are added, stablecoin, money transmission, securities, commodities, and state licensing issues may apply.
-

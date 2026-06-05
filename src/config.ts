@@ -16,12 +16,29 @@ export const tokenConfigSchema = z.object({
 
 export type TokenConfig = z.infer<typeof tokenConfigSchema>;
 
+const MAINNET_REQUIRED_ENV = [
+  "ALLOW_MAINNET",
+  "MAINNET_LEGAL_REVIEW_COMPLETE",
+  "MAINNET_SECURITY_REVIEW_COMPLETE",
+  "MAINNET_MULTISIG_READY",
+  "MAINNET_DEPENDENCY_RISK_ACCEPTED",
+  "MAINNET_VALIDATOR_REHEARSED",
+  "MAINNET_METADATA_READY"
+] as const;
+
+function enforceMainnetGate() {
+  const missing = MAINNET_REQUIRED_ENV.filter((name) => process.env[name] !== "true");
+  if (missing.length > 0) {
+    throw new Error(`Mainnet is blocked. Missing launch gates: ${missing.join(", ")}.`);
+  }
+}
+
 export function loadTokenConfig(path: string): TokenConfig {
   const raw = JSON.parse(readFileSync(path, "utf8")) as unknown;
   const config = tokenConfigSchema.parse(raw);
 
-  if (config.cluster === "mainnet-beta" && process.env.ALLOW_MAINNET !== "true") {
-    throw new Error("Mainnet is blocked. Set ALLOW_MAINNET=true only after review.");
+  if (config.cluster === "mainnet-beta") {
+    enforceMainnetGate();
   }
 
   if (config.initialSupply === "0") {

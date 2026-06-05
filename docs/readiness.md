@@ -41,7 +41,7 @@ The token minting path and staking program have been built, deployed, and tested
 - Freeze authority: not set.
 - Staking program deployed: `4kp8deHBoE6FQ7C3PD4QJ8Sw6rc9cSyJGtDxdBhwDmv2`.
 
-See `docs/localnet-results.md`, `docs/devnet-results.md`, and `docs/pre-mainnet-test-report.md` for addresses, transactions, commands, and mainnet blockers.
+See `docs/localnet-results.md`, `docs/devnet-results.md`, `docs/pre-mainnet-test-report.md`, `docs/mainnet-architecture.md`, `docs/dependency-risk-register.md`, and `docs/staking-economics.md` for addresses, transactions, commands, launch gates, and mainnet blockers.
 
 ## Ready-To-Run Commands
 
@@ -89,6 +89,7 @@ Devnet core functionality is complete:
 
 Mainnet remains blocked until:
 
+- All mainnet launch gate environment variables are explicitly set after review.
 - Dependency vulnerabilities are reviewed and resolved or formally accepted.
 - Legal review is complete.
 - Independent smart contract review is complete.
