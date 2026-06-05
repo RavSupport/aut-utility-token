@@ -26,7 +26,7 @@ https://docs.ipfs.tech/quickstart/pin/
 
 Publish:
 
-- `public/` static website
+- `docs/index.html` static website
 - `docs/research.md`
 - `docs/security.md`
 - `docs/validator-ops.md`
@@ -58,16 +58,16 @@ Manual path:
 3. In GitHub, open repository settings.
 4. Go to Pages.
 5. Set source to deploy from a branch.
-6. Select the `main` branch and `/public` folder.
+6. Select the `main` branch and `/docs` folder.
 7. Save.
-8. GitHub Pages will publish `public/index.html`.
+8. GitHub Pages will publish `docs/index.html`.
 
 ## Cloudflare Pages Mirror
 
 1. Create a Cloudflare Pages project.
 2. Connect the same GitHub repository.
 3. Set build command to blank.
-4. Set output directory to `public`.
+4. Set output directory to `public` for the Cloudflare mirror, or `docs` for the GitHub Pages copy.
 5. Deploy.
 
 ## IPFS Snapshot
