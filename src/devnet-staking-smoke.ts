@@ -13,11 +13,13 @@ import {
 import {
   ACCOUNT_SIZE,
   TOKEN_PROGRAM_ID,
+  createAssociatedTokenAccount,
   createInitializeAccountInstruction,
-  createTransferCheckedInstruction,
+  createMint,
   getAccount,
   getAssociatedTokenAddressSync,
-  getMinimumBalanceForRentExemptAccount
+  getMinimumBalanceForRentExemptAccount,
+  mintTo
 } from "@solana/spl-token";
 import { loadKeypair } from "./keypair.js";
 
@@ -63,12 +65,19 @@ const idl = JSON.parse(readFileSync("target/idl/utility_staking.json", "utf8")) 
 const program = new Program(idl, provider);
 
 const ownerTokenAccount = getAssociatedTokenAddressSync(AUT_MINT, payer.publicKey);
+const rewardMint = await createMint(connection, payer, payer.publicKey, null, DECIMALS);
+const ownerRewardAccount = await createAssociatedTokenAccount(
+  connection,
+  payer,
+  rewardMint,
+  payer.publicKey
+);
 const [pool] = PublicKey.findProgramAddressSync(
-  [Buffer.from("pool"), AUT_MINT.toBuffer(), AUT_MINT.toBuffer()],
+  [Buffer.from("pool"), AUT_MINT.toBuffer(), rewardMint.toBuffer()],
   PROGRAM_ID
 );
 const [poolSigner] = PublicKey.findProgramAddressSync(
-  [Buffer.from("pool-signer"), AUT_MINT.toBuffer(), AUT_MINT.toBuffer()],
+  [Buffer.from("pool-signer"), AUT_MINT.toBuffer(), rewardMint.toBuffer()],
   PROGRAM_ID
 );
 const [position] = PublicKey.findProgramAddressSync(
@@ -78,30 +87,15 @@ const [position] = PublicKey.findProgramAddressSync(
 
 const beforeOwner = await getAccount(connection, ownerTokenAccount);
 const stakeVault = await createVaultTokenAccount(connection, payer, AUT_MINT, poolSigner);
-const rewardVault = await createVaultTokenAccount(connection, payer, AUT_MINT, poolSigner);
-
-await sendAndConfirmTransaction(
-  connection,
-  new Transaction().add(
-    createTransferCheckedInstruction(
-      ownerTokenAccount,
-      AUT_MINT,
-      rewardVault,
-      payer.publicKey,
-      REWARD_VAULT_FUNDING,
-      DECIMALS
-    )
-  ),
-  [payer],
-  { commitment: "confirmed" }
-);
+const rewardVault = await createVaultTokenAccount(connection, payer, rewardMint, poolSigner);
+await mintTo(connection, payer, rewardMint, rewardVault, payer, REWARD_VAULT_FUNDING);
 
 await program.methods
   .initializePool(new BN(REWARD_SCALE.toString()))
   .accounts({
     authority: payer.publicKey,
     stakeMint: AUT_MINT,
-    rewardMint: AUT_MINT,
+    rewardMint,
     pool,
     poolSigner,
     stakeVault,
@@ -142,8 +136,8 @@ await program.methods
     pool,
     position,
     poolSigner,
-    rewardMint: AUT_MINT,
-    ownerRewardAccount: ownerTokenAccount,
+    rewardMint,
+    ownerRewardAccount,
     rewardVault,
     tokenProgram: TOKEN_PROGRAM_ID
   })
@@ -164,14 +158,17 @@ await program.methods
   .rpc();
 
 const afterOwner = await getAccount(connection, ownerTokenAccount);
+const afterOwnerReward = await getAccount(connection, ownerRewardAccount);
 const afterStakeVault = await getAccount(connection, stakeVault);
 const afterRewardVault = await getAccount(connection, rewardVault);
 const result = {
   cluster: "devnet",
-  mint: AUT_MINT.toBase58(),
+  stakeMint: AUT_MINT.toBase58(),
+  rewardMint: rewardMint.toBase58(),
   programId: PROGRAM_ID.toBase58(),
   owner: payer.publicKey.toBase58(),
   ownerTokenAccount: ownerTokenAccount.toBase58(),
+  ownerRewardAccount: ownerRewardAccount.toBase58(),
   pool: pool.toBase58(),
   poolSigner: poolSigner.toBase58(),
   position: position.toBase58(),
@@ -179,6 +176,7 @@ const result = {
   rewardVault: rewardVault.toBase58(),
   ownerBalanceBefore: beforeOwner.amount.toString(),
   ownerBalanceAfter: afterOwner.amount.toString(),
+  ownerRewardBalanceAfter: afterOwnerReward.amount.toString(),
   stakeVaultBalanceAfter: afterStakeVault.amount.toString(),
   rewardVaultBalanceAfter: afterRewardVault.amount.toString()
 };

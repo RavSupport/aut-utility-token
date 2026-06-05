@@ -48,16 +48,20 @@ solana confirm 5a4wTnZt3JKTFDuTbYjuiYBXvBf8xHXTtMa46sk1qJ5a7YQ95fCaoJuDvTkg1QFgG
 
 ## Staking Smoke Test
 
-An end-to-end staking smoke test passed on devnet using the deployed AUT mint.
+An end-to-end staking smoke test passed on devnet using the deployed AUT mint as the stake asset. The repeatable smoke test creates a temporary reward mint on each run so the pool PDA is unique and can be tested more than once without reminting AUT.
 
-- Pool: `ES4dRMfJ5Gphmvd2Hm8DsxPDzQB9cUDnnN4HRY6QekJa`
-- Pool signer: `3UqGbF8hgpFCApymbue7PrAendNfn26ABjWvyitoh4mq`
-- Position: `HZ1mhjevn8XBjC1FFRpqpoG2Hk38h2U3xeXhcrfABjCW`
-- Stake vault: `ETsrpvfGJprMcLQ46Yyxm5vAKHMoh1ESYRy1QWmEFL7X`
-- Reward vault: `7Dji7HYgmxRPWML7RaDdpCsJiB7p9Ju4BZw8gubvaRvP`
+- Stake mint: `3SRkJBHkko3BPQp5qpf9G5TfoGyPShhUg9HUFagKErWw`
+- Reward mint: `EgDgYTAN23G9wzYKA4FtAR6HWe96eM2dyNy27Bf1furp`
+- Pool: `A1bLrgsTCkCPZKka8dUA1Ac62RLHFhpF8vC69bed7BvB`
+- Pool signer: `W4Cz3KxmUQgEC2THVd1RdWBAgyRxfCRmnZC6vx3tSpe`
+- Position: `CwcV4UwDyZHTNwR7hgLGsh2SxTDyihZ7CiC46m7e6sRN`
+- Stake vault: `rNVityX8SUi8WCxKATbQELsP91YUUFYAdvLd94Dsttw`
+- Reward vault: `Bat4KScW7jdoXV5QJeDhCMtPvmxQmuBYqS57uYaErUs2`
 - Owner token account: `55bx8NAZH5WiASz18xbtzwGkUouhHdMCpXyxYnh2MRJa`
-- Owner balance before: `21,000,000,000,000` base units
-- Owner balance after: `20,999,800,000,000` base units
+- Owner reward account: `5TJQ7r2v8QFpLbcpS4dYpZaWHbLx1wu7UuPMzFBAX5t6`
+- Owner AUT balance before: `20,999,800,000,000` base units
+- Owner AUT balance after: `20,999,800,000,000` base units
+- Owner reward balance after: `300,000,000` base units
 - Stake vault balance after unstake: `0`
 - Reward vault balance after claim: `200,000,000` base units
 

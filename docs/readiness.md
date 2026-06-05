@@ -33,13 +33,15 @@ The token minting path and staking program have been built, deployed, and tested
 - `npx tsc --noEmit`: passed.
 - `anchor build`: passed in WSL.
 - `RUN_LOCALNET_TESTS=true npm test`: passed.
+- `npm run devnet:staking-smoke`: passed with AUT as stake mint and a temporary reward mint.
+- `npm audit --json`: failed production gate with 10 findings: 7 moderate, 3 high.
 - Localnet token supply: 21,000,000 AUT.
 - Devnet token supply: 21,000,000 AUT.
 - Mint authority: not set.
 - Freeze authority: not set.
 - Staking program deployed: `4kp8deHBoE6FQ7C3PD4QJ8Sw6rc9cSyJGtDxdBhwDmv2`.
 
-See `docs/localnet-results.md` and `docs/devnet-results.md` for addresses, transactions, and commands.
+See `docs/localnet-results.md`, `docs/devnet-results.md`, and `docs/pre-mainnet-test-report.md` for addresses, transactions, commands, and mainnet blockers.
 
 ## Ready-To-Run Commands
 
@@ -87,6 +89,7 @@ Devnet core functionality is complete:
 
 Mainnet remains blocked until:
 
+- Dependency vulnerabilities are reviewed and resolved or formally accepted.
 - Legal review is complete.
 - Independent smart contract review is complete.
 - Treasury multisig is configured.
@@ -94,3 +97,5 @@ Mainnet remains blocked until:
 - Validator operations are tested.
 - Hyper-V migration plan is rehearsed.
 - Monitoring and incident response are live.
+
+The current passing localnet and devnet checks prove functional behavior. They do not prove that AUT is safe to sell, market, or deploy on mainnet.
