@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "wallet:create-devnet": "tsx src/create-devnet-wallet.ts",
+    "diag:process": "node scripts/diagnose-process-launch.cjs",
     "token:create": "tsx src/create-token.ts",
     "token:validate-config": "tsx src/validate-config.ts",
+    "devnet:staking-smoke": "tsx src/devnet-staking-smoke.ts",
     "test": "vitest run",
     "anchor:build": "anchor build",
     "anchor:test": "anchor test"
@@ -19,6 +21,7 @@
   },
   "devDependencies": {
     "@coral-xyz/anchor": "^0.32.1",
+    "@types/bn.js": "^5.2.0",
     "@types/node": "^24.10.1",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",

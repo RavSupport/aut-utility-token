@@ -1,0 +1,16 @@
+{
+  "cluster": "devnet",
+  "mint": "3SRkJBHkko3BPQp5qpf9G5TfoGyPShhUg9HUFagKErWw",
+  "programId": "4kp8deHBoE6FQ7C3PD4QJ8Sw6rc9cSyJGtDxdBhwDmv2",
+  "owner": "8Nnsxq4Tps1Kubf5cYw1qU7UQgf3ksuFT5bmc1yYwLaJ",
+  "ownerTokenAccount": "55bx8NAZH5WiASz18xbtzwGkUouhHdMCpXyxYnh2MRJa",
+  "pool": "ES4dRMfJ5Gphmvd2Hm8DsxPDzQB9cUDnnN4HRY6QekJa",
+  "poolSigner": "3UqGbF8hgpFCApymbue7PrAendNfn26ABjWvyitoh4mq",
+  "position": "HZ1mhjevn8XBjC1FFRpqpoG2Hk38h2U3xeXhcrfABjCW",
+  "stakeVault": "ETsrpvfGJprMcLQ46Yyxm5vAKHMoh1ESYRy1QWmEFL7X",
+  "rewardVault": "7Dji7HYgmxRPWML7RaDdpCsJiB7p9Ju4BZw8gubvaRvP",
+  "ownerBalanceBefore": "21000000000000",
+  "ownerBalanceAfter": "20999800000000",
+  "stakeVaultBalanceAfter": "0",
+  "rewardVaultBalanceAfter": "200000000"
+}

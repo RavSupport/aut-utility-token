@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { setTimeout as delay } from "node:timers/promises";
-import { Program, AnchorProvider, BN, Wallet, setProvider, type Idl } from "@coral-xyz/anchor";
+import { Program, AnchorProvider, Wallet, setProvider, type Idl } from "@coral-xyz/anchor";
+import BN from "bn.js";
 import { beforeAll, describe, expect, it } from "vitest";
 import {
   Connection,

@@ -63,3 +63,11 @@ Build staking program:
 ```powershell
 npm run anchor:build
 ```
+
+Deploy to devnet after localnet verification:
+
+```powershell
+.\scripts\devnet-deploy.ps1
+```
+
+Devnet may require manual faucet funding if public airdrops are rate-limited.

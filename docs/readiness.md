@@ -4,9 +4,9 @@ Date: 2026-06-04
 
 ## Current Status
 
-Functional on localnet. Not yet production-ready.
+Functional on localnet and deployed on devnet. Not yet production-ready.
 
-The token minting path and staking program have been built, deployed, and tested on a local Solana validator. Devnet deployment is blocked only by public faucet rate limiting. Mainnet remains intentionally blocked.
+The token minting path and staking program have been built, deployed, and tested on a local Solana validator. The token and staking program are also deployed on Solana devnet. Mainnet remains intentionally blocked.
 
 ## Implemented
 
@@ -20,6 +20,9 @@ The token minting path and staking program have been built, deployed, and tested
 - Localnet token mint verified.
 - Localnet staking program deployed.
 - Localnet staking behavior tests passed.
+- Devnet token mint verified.
+- Devnet staking program deployed.
+- Devnet staking smoke test passed.
 - Validator operations plan.
 - Security and launch checklist.
 - Research notes with primary-source links.
@@ -31,11 +34,12 @@ The token minting path and staking program have been built, deployed, and tested
 - `anchor build`: passed in WSL.
 - `RUN_LOCALNET_TESTS=true npm test`: passed.
 - Localnet token supply: 21,000,000 AUT.
+- Devnet token supply: 21,000,000 AUT.
 - Mint authority: not set.
 - Freeze authority: not set.
 - Staking program deployed: `4kp8deHBoE6FQ7C3PD4QJ8Sw6rc9cSyJGtDxdBhwDmv2`.
 
-See `docs/localnet-results.md` for addresses, transactions, and commands.
+See `docs/localnet-results.md` and `docs/devnet-results.md` for addresses, transactions, and commands.
 
 ## Ready-To-Run Commands
 
@@ -69,11 +73,15 @@ The localnet project is functional because all of these passed:
 - Reward claims behave correctly.
 - Invalid actions fail correctly.
 
-Devnet remains pending:
+Devnet core functionality is complete:
 
-- Devnet wallet funding.
-- Devnet token mint.
-- Devnet staking deployment and test pass.
+- Token mint.
+- Token authority revocation.
+- Staking program deployment.
+- Staking pool initialization.
+- Stake.
+- Reward claim.
+- Unstake.
 
 ## Production Gate
 
